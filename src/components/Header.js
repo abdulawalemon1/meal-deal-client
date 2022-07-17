@@ -21,7 +21,8 @@ const Header = () => {
         dispatch({
             type: actionType.SET_USER,
             user: providerData[0]
-        })
+        });
+        localStorage.setItem('user', JSON.stringify(providerData[0]))
     }
     return (
         <header className='fixed z-50 w-screen p-6 px-16'>
