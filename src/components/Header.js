@@ -94,7 +94,7 @@ const Header = () => {
                                         )
                                     }
 
-                                    <p className='px-4 flex items-center gap-3 cursor-pointer  hover:bg-primary transition-all duration-100 ease-in-out text-textColor text-base'>SignOut<MdLogout></MdLogout></p>
+                                    <p onClick={logout} className='px-4 flex items-center gap-3 cursor-pointer  hover:bg-primary transition-all duration-100 ease-in-out text-textColor text-base'>SignOut<MdLogout></MdLogout></p>
                                 </motion.div>
                             )
                         }
