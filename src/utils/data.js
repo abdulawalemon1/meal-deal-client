@@ -10,3 +10,43 @@ export const heroData = [
     { id: 3, name: 'Tuna BBQ', decp: 'Fish BBQ + Salad', price: '9.5', imgSrc: fi3 },
     { id: 4, name: 'Strawberries', decp: 'Fresh Fruits', price: '2.75', imgSrc: f1 },
 ]
+
+export const categories = [
+    {
+        id: 1,
+        name: 'Chicken',
+        urlParaName: 'chicken',
+    },
+    {
+        id: 2,
+        name: 'Curry',
+        urlParaName: 'curry',
+    },
+    {
+        id: 3,
+        name: 'Rice',
+        urlParaName: 'rice',
+    },
+    {
+        id: 4,
+        name: 'Fish',
+        urlParaName: 'fish',
+    },
+    {
+        id: 5,
+        name: 'Fruits',
+        urlParaName: 'fruits',
+    },
+    {
+        id: 6,
+        name: 'Icecreams',
+        urlParaName: 'icecreams',
+    },
+    {
+        id: 7,
+        name: 'Soft Drinks',
+        urlParaName: 'drinks',
+    },
+]
+
+export const imageAsset = null;

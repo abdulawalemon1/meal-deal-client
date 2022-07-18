@@ -44,7 +44,7 @@ const Header = () => {
     }
 
     return (
-        <header className='fixed z-50 w-screen p-3 px-4 md:p-6 md:px-16'>
+        <header className='bg-primary drop-shadow-lg fixed z-50 w-screen p-3 px-4 md:p-6 md:px-16'>
             {/* Dekstop and Tablet */}
             <div className='hidden md:flex w-full h-full items-center justify-between'>
                 <Link to={'/'} className='flex items-center gap-2'>
@@ -88,7 +88,9 @@ const Header = () => {
                                     {
                                         user && user.uid === "107293306578021978254" && (
                                             <Link to="/createItem">
-                                                <p className='px-3 flex items-center gap-3 cursor-pointer hover:bg-primary transition-all duration-100 ease-in-out text-textColor text-base'>New Item<MdAdd></MdAdd></p>
+                                                <p className='px-3 flex items-center gap-3 cursor-pointer hover:bg-primary transition-all duration-100 ease-in-out text-textColor text-base'
+                                                    onClick={() => setisMenu(false)}
+                                                >New Item<MdAdd></MdAdd></p>
 
                                             </Link>
                                         )
@@ -136,7 +138,9 @@ const Header = () => {
                                 {
                                     user && user.uid === "107293306578021978254" && (
                                         <Link to="/createItem">
-                                            <p className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-primary transition-all duration-100 ease-in-out text-textColor text-base'>New Item<MdAdd></MdAdd></p>
+                                            <p className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-primary transition-all duration-100 ease-in-out text-textColor text-base'
+                                                onClick={() => setisMenu(false)}
+                                            >New Item<MdAdd></MdAdd></p>
 
                                         </Link>
                                     )
@@ -145,10 +149,18 @@ const Header = () => {
 
                                 <ul
                                     className='flex flex-col '>
-                                    <li className='px-4 py-2 hover:bg-primary text-base textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out'>Home</li>
-                                    <li className='px-4 py-2 hover:bg-primary text-base textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out'>Menu</li>
-                                    <li className='px-4 py-2 hover:bg-primary text-base textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out'>About Us</li>
-                                    <li className='px-4 py-2 hover:bg-primary text-base textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out'>Services</li>
+                                    <li className='px-4 py-2 hover:bg-primary text-base textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out'
+                                        onClick={() => setisMenu(false)}
+                                    >Home</li>
+                                    <li className='px-4 py-2 hover:bg-primary text-base textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out'
+                                        onClick={() => setisMenu(false)}
+                                    >Menu</li>
+                                    <li className='px-4 py-2 hover:bg-primary text-base textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out'
+                                        onClick={() => setisMenu(false)}
+                                    >About Us</li>
+                                    <li className='px-4 py-2 hover:bg-primary text-base textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out'
+                                        onClick={() => setisMenu(false)}
+                                    >Services</li>
                                 </ul>
 
                                 <p onClick={logout} className=' rounded px-4 py-2 flex items-center justify-center bg-primary gap-3 cursor-pointer  hover:bg-orange-300 transition-all duration-100 ease-in-out text-textColor text-base shadow-md'>SignOut<MdLogout></MdLogout></p>
