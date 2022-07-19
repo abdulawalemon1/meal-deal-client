@@ -3,7 +3,11 @@ import { motion } from 'framer-motion';
 import { MdFastfood, MdCloudUpload, MdDelete, MdFoodBank, MdAttachMoney } from 'react-icons/md';
 import { categories } from '../utils/data';
 import Loader from './Loader';
-import { imageAsset } from '../utils/data';
+import { storage } from '../firebase.config';
+// import { imageAsset } from '../utils/data';
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+
+
 const CreateContainer = () => {
 
     const [title, setTitle] = useState("");
@@ -14,9 +18,40 @@ const CreateContainer = () => {
     const [alterStatus, setAlterStatus] = useState("danger");
     const [msg, setMsg] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [imageAsset, setImageAsset] = useState('');
 
 
-    const uploadImage = () => {
+    const uploadImage = (e) => {
+        setIsLoading(true);
+        const imageFile = e.target.files[0];
+        const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, imageFile);
+
+        uploadTask.on('state_changed', (snapshot) => {
+            const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+
+        }, (error) => {
+            console.log(error);
+            setFields(true);
+            setMsg('Error while uploading. Try again!');
+            setAlterStatus('danger');
+            setTimeout(() => {
+                setFields(false)
+                setIsLoading(false)
+            }, 4000);
+        }, () => {
+            getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
+                setImageAsset(downloadURL);
+                setIsLoading(false);
+                setFields(true);
+                setMsg('Image Uploaded successfully!');
+                setAlterStatus('success');
+                setTimeout(() => {
+                    setFields(false);
+                }, 4000);
+            })
+        })
+
 
     }
 
