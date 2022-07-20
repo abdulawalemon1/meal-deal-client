@@ -21,7 +21,7 @@ const MainContainer = () => {
 
             <section className='w-full my-6'>
                 <div className='w-full flex items-center justify-between'>
-                    <p className='text-2xl font-semibold capitalize relative text-headingColor before:absolute before:rounded-lg before:content before:w-20 before:h-1 before:-bottom-2 before:left-0 before:bg-orange-600  transition-all ease-in-out duration-100'>Our Fresh and Healthy Fruits</p>
+                    <p className='text-2xl font-semibold capitalize relative text-headingColor before:absolute before:rounded-lg before:content before:w-20 before:h-1 before:-bottom-2 before:left-0 before:bg-orange-600  transition-all ease-in-out duration-100'>Our Delicious Ice-cream Menu</p>
 
                     <div className='hidden md:flex items-center gap-3'>
                         <motion.div
@@ -41,7 +41,7 @@ const MainContainer = () => {
                 <RowContainer
                     scrollValue={scrollValue}
                     flag={true}
-                    data={foodItems?.filter(n => n.category === 'drinks')}></RowContainer>
+                    data={foodItems?.filter(n => n.category === 'icecreams')}></RowContainer>
 
             </section>
 
