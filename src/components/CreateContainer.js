@@ -6,10 +6,14 @@ import Loader from './Loader';
 import { storage } from '../firebase.config';
 // import { imageAsset } from '../utils/data';
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { saveItem } from '../utils/firebaseFunctions';
+import { getAllFoodItems, saveItem } from '../utils/firebaseFunctions';
+import { actionType } from '../context/reducer';
+import { useStateValue } from '../context/StateProvider';
 
 
 const CreateContainer = () => {
+
+    const [{ foodItems }, dispatch] = useStateValue();
 
     const [title, setTitle] = useState("");
     const [calories, setCalories] = useState("");
@@ -116,6 +120,9 @@ const CreateContainer = () => {
             }, 4000);
         }
 
+        fetchData();
+
+
     };
 
     const clearData = () => {
@@ -124,6 +131,15 @@ const CreateContainer = () => {
         setCalories("");
         setPrice("");
         setCalories("");
+    }
+
+    const fetchData = async () => {
+        await getAllFoodItems().then(data => {
+            dispatch({
+                type: actionType.SET_FOOD_ITEMS,
+                foodItems: data,
+            })
+        })
     }
     return (
         <div className='w-full min-h-screen flex items-center justify-center '>
