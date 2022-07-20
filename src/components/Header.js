@@ -12,10 +12,11 @@ import { actionType } from '../context/reducer';
 
 
 const Header = () => {
+
     const firebaseAuth = getAuth(app);
     const provider = new GoogleAuthProvider();
 
-    const [{ user }, dispatch] = useStateValue();
+    const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
 
     const [isMenu, setisMenu] = useState(false);
 
@@ -43,6 +44,13 @@ const Header = () => {
         });
     }
 
+    const showCart = () => {
+        dispatch({
+            type: actionType.SET_CART_SHOW,
+            cartShow: !cartShow,
+        });
+    };
+
     return (
         <header className='bg-primary drop-shadow-lg fixed z-50 w-screen p-3 px-4 md:p-6 md:px-16'>
             {/* Dekstop and Tablet */}
@@ -62,11 +70,16 @@ const Header = () => {
                         <li className='text-base textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out'>About Us</li>
                         <li className='text-base textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out'>Services</li>
                     </motion.ul>
-                    <div className='relative flex flex-center justify-center'>
+                    <div className='relative flex flex-center justify-center' onClick={showCart}>
                         <RiShoppingBasketFill className='text-textColor 2xl  cursor-pointer' />
-                        <div className='absolute -top-3 -right-2 w-5 h-5 rounded-full bg-cartBg flex items-center justify-center'>
-                            <p className='text-xs text-white font-semibold'>1</p>
-                        </div>
+                        {cartItems && cartItems.length > 0 && (
+                            <div className=" absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center">
+                                <p className="text-xs text-white font-semibold">
+                                    {cartItems.length}
+                                </p>
+                            </div>
+                        )}
+
                     </div>
                     <div className='relative'>
                         <motion.img
@@ -106,7 +119,8 @@ const Header = () => {
             {/* Mobile */}
             <div className='flex items-center justify-between md:hidden w-full h-full'>
 
-                <div className='relative flex flex-center justify-center'>
+                <div className='relative flex flex-center justify-center' onClick={showCart}>
+
                     <RiShoppingBasketFill className='text-textColor 2xl  cursor-pointer' />
                     <div className='absolute -top-3 -right-2 w-5 h-5 rounded-full bg-cartBg flex items-center justify-center'>
                         <p className='text-xs text-white font-semibold'>1</p>

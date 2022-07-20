@@ -10,9 +10,8 @@ import CartContainer from './CartContainer';
 const MainContainer = () => {
     const rowContainerRef = useRef();
 
-    const [{ foodItems }, dispatch] = useStateValue();
+    const [{ foodItems, cartShow }, dispatch] = useStateValue();
     const [scrollValue, setScrollValue] = useState(0);
-
 
 
     useEffect(() => { }, [scrollValue]);
@@ -48,7 +47,7 @@ const MainContainer = () => {
 
             <MenuContainer />
 
-            {/* {cartShow && <CartContainer />} */}
+            {cartShow && <CartContainer />}
         </div>
     );
 };
