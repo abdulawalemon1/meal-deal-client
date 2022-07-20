@@ -5,7 +5,8 @@ import { categories } from '../utils/data';
 import Loader from './Loader';
 import { storage } from '../firebase.config';
 // import { imageAsset } from '../utils/data';
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { saveItem } from '../utils/firebaseFunctions';
 
 
 const CreateContainer = () => {
@@ -56,10 +57,73 @@ const CreateContainer = () => {
     }
 
     const deleteImage = () => {
+        setIsLoading(true);
+        const deleteRef = ref(storage, imageAsset)
+        deleteObject(deleteRef).then(() => {
+            setImageAsset(null);
+            setIsLoading(false);
+            setFields(true);
+            setMsg('Image deleted successfully!');
+            setAlterStatus('success');
+            setTimeout(() => {
+                setFields(false);
+            }, 4000);
 
+        })
     }
     const saveDetails = () => {
+        setIsLoading(true);
+        try {
 
+            if (!title || !calories || !imageAsset || !price || !category) {
+                setFields(true);
+                setMsg('Required Fields Must be Filled!');
+                setAlterStatus('danger');
+                setTimeout(() => {
+                    setFields(false)
+                    setIsLoading(false)
+                }, 4000);
+            } else {
+                const data = {
+                    id: `${Date.now()}`,
+                    title: title,
+                    imageURL: imageAsset,
+                    category: category,
+                    calories: calories,
+                    qty: 1,
+                    price: price,
+                }
+                saveItem(data);
+                setIsLoading(false);
+                setFields(true);
+                setMsg('Data uploaded successfully!');
+                clearData();
+                setAlterStatus('success');
+                setTimeout(() => {
+                    setFields(false);
+
+                }, 4000);
+
+            }
+        } catch (error) {
+            console.log(error);
+            setFields(true);
+            setMsg('Error while uploading. Try again!');
+            setAlterStatus('danger');
+            setTimeout(() => {
+                setFields(false)
+                setIsLoading(false)
+            }, 4000);
+        }
+
+    };
+
+    const clearData = () => {
+        setTitle("");
+        setImageAsset(null);
+        setCalories("");
+        setPrice("");
+        setCalories("");
     }
     return (
         <div className='w-full min-h-screen flex items-center justify-center '>
